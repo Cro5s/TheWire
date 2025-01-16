@@ -1,0 +1,8 @@
+<h1>The Wire</h1>
+
+<% if @blogs %>
+  <% @blogs.each do |blog| %>
+    <h2><%= link_to blog.title, blog %></h2>
+    <p><%= blog.body %></p>
+  <% end %>
+<% end %>
