@@ -1,12 +1,11 @@
 class BlogsController < ApplicationController
+  before_action :find_blog, except: %i[index new create]
+
   def index
     @blogs = Blog.all
   end
 
   def show
-    @blog = Blog.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path
   end
 
   def new
@@ -24,12 +23,9 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    @blog = Blog.find(params[:id])
   end
 
   def update
-    @blog = Blog.find(params[:id])
-
     if @blog.update(blog_params)
       redirect_to @blog
     else
@@ -38,7 +34,6 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blog = Blog.find(params[:id])
     @blog.destroy
 
     redirect_to root_path
@@ -48,5 +43,11 @@ class BlogsController < ApplicationController
 
   def blog_params
     params.require(:blog).permit(:title, :body)
+  end
+
+  def find_blog
+    @blog = Blog.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 end
