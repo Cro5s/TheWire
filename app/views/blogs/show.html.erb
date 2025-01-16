@@ -1,4 +1,4 @@
-<%= link_to 'Home', root_path %>
+<%= link_to "Home", root_path %>
 <%= link_to "Edit", edit_blog_path(@blog) if user_signed_in? %>
 <h2><%= @blog.title %></h2>
 <p><%= @blog.body %><p> 
